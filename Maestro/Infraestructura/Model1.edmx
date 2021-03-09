@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="maestropersonaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="IdPersona" />
+          </Key>
+          <Property Name="IdPersona" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="datetime" Nullable="false" />
+          <Property Name="TipoIdentificacion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NumeroIdentificacion" Type="bigint" Nullable="false" />
+        </EntityType>
+        <Function Name="ActualizarPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdPersona" Type="bigint" Mode="In" />
+          <Parameter Name="Nombres" Type="varchar" Mode="In" />
+          <Parameter Name="Apellidos" Type="varchar" Mode="In" />
+          <Parameter Name="FechaNacimiento" Type="datetime" Mode="In" />
+          <Parameter Name="TipoIdentificacion" Type="varchar" Mode="In" />
+          <Parameter Name="NumeroIdentificacion" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="EliminarPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdPersona" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="InsertarPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombres" Type="varchar" Mode="In" />
+          <Parameter Name="Apellidos" Type="varchar" Mode="In" />
+          <Parameter Name="FechaNacimiento" Type="datetime" Mode="In" />
+          <Parameter Name="TipoIdentificacion" Type="varchar" Mode="In" />
+          <Parameter Name="NumeroIdentificacion" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="ObtenerPersonaPorId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdPersona" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="ObtenerTodos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="maestropersonaModelStoreContainer">
+          <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="maestropersonaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="IdPersona" />
+          </Key>
+          <Property Name="IdPersona" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombres" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TipoIdentificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NumeroIdentificacion" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="maestropersonaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Persona" EntityType="Self.Persona" />
+          <FunctionImport Name="ActualizarPersona">
+            <Parameter Name="IdPersona" Mode="In" Type="Int64" />
+            <Parameter Name="Nombres" Mode="In" Type="String" />
+            <Parameter Name="Apellidos" Mode="In" Type="String" />
+            <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="TipoIdentificacion" Mode="In" Type="String" />
+            <Parameter Name="NumeroIdentificacion" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarPersona">
+            <Parameter Name="IdPersona" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="InsertarPersona" ReturnType="Collection(Decimal)">
+            <Parameter Name="Nombres" Mode="In" Type="String" />
+            <Parameter Name="Apellidos" Mode="In" Type="String" />
+            <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="TipoIdentificacion" Mode="In" Type="String" />
+            <Parameter Name="NumeroIdentificacion" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="ObtenerPersonaPorId" ReturnType="Collection(maestropersonaModel.ObtenerPersonaPorId_Result)">
+            <Parameter Name="IdPersona" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="ObtenerTodos" ReturnType="Collection(maestropersonaModel.ObtenerTodos_Result)" />
+        </EntityContainer>
+        <ComplexType Name="ObtenerPersonaPorId_Result">
+          <Property Type="Int64" Name="IdPersona" Nullable="false" />
+          <Property Type="String" Name="Nombres" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Apellidos" Nullable="false" MaxLength="150" />
+          <Property Type="DateTime" Name="FechaNacimiento" Nullable="false" Precision="23" />
+          <Property Type="String" Name="TipoIdentificacion" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="NumeroIdentificacion" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ObtenerTodos_Result">
+          <Property Type="Int64" Name="IdPersona" Nullable="false" />
+          <Property Type="String" Name="Nombres" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Apellidos" Nullable="false" MaxLength="150" />
+          <Property Type="DateTime" Name="FechaNacimiento" Nullable="false" Precision="23" />
+          <Property Type="String" Name="TipoIdentificacion" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="NumeroIdentificacion" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="maestropersonaModelStoreContainer" CdmEntityContainer="maestropersonaEntities">
+          <EntitySetMapping Name="Persona">
+            <EntityTypeMapping TypeName="maestropersonaModel.Persona">
+              <MappingFragment StoreEntitySet="Persona">
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="TipoIdentificacion" ColumnName="TipoIdentificacion" />
+                <ScalarProperty Name="NumeroIdentificacion" ColumnName="NumeroIdentificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ActualizarPersona" FunctionName="maestropersonaModel.Store.ActualizarPersona" />
+          <FunctionImportMapping FunctionImportName="EliminarPersona" FunctionName="maestropersonaModel.Store.EliminarPersona" />
+          <FunctionImportMapping FunctionImportName="InsertarPersona" FunctionName="maestropersonaModel.Store.InsertarPersona" />
+          <FunctionImportMapping FunctionImportName="ObtenerPersonaPorId" FunctionName="maestropersonaModel.Store.ObtenerPersonaPorId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="maestropersonaModel.ObtenerPersonaPorId_Result">
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="TipoIdentificacion" ColumnName="TipoIdentificacion" />
+                <ScalarProperty Name="NumeroIdentificacion" ColumnName="NumeroIdentificacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ObtenerTodos" FunctionName="maestropersonaModel.Store.ObtenerTodos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="maestropersonaModel.ObtenerTodos_Result">
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="TipoIdentificacion" ColumnName="TipoIdentificacion" />
+                <ScalarProperty Name="NumeroIdentificacion" ColumnName="NumeroIdentificacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
